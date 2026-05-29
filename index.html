@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyWater 130nm EDA Docker Setup | Micron University</title>
+    <style>
+        /* Core Layout */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9fbfd;
+        }
+        
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Typography & Colors */
+        h1, h2, h3 { color: #0033a0; /* Micron Blue */ }
+        h1 { border-bottom: 3px solid #0033a0; padding-bottom: 10px; margin-top: 0; }
+        h2 { border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; margin-top: 40px; }
+        
+        /* OS Selector Grid */
+        .os-prompt {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .os-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .os-card {
+            flex: 1;
+            padding: 25px;
+            text-align: center;
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .os-card:hover {
+            border-color: #0033a0;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 51, 160, 0.1);
+        }
+
+        .os-card.active {
+            background-color: #0033a0;
+            color: #ffffff;
+            border-color: #0033a0;
+        }
+
+        /* Content Sections */
+        .os-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .os-section.active {
+            display: block;
+        }
+
+        #common-steps {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Code Blocks & Placeholders */
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .instruction-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            display: block;
+        }
+
+        .image-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e9ecef;
+            border: 2px dashed #adb5bd;
+            color: #6c757d;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            border-radius: 8px;
+            min-height: 250px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .edit-text {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            font-style: italic;
+            margin: 15px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>SkyWater 130nm PDK & IIC-OSIC Docker Setup</h1>
+            <p><strong>Micron University - Engineering Department</strong></p>
+            <p>Select your operating system below to generate the custom instructions for setting up your containerized EDA environment.</p>
+        </header>
+
+        <p class="os-prompt"><strong>Step 1: Choose your Operating System</strong></p>
+        
+        <div class="os-grid">
+            <div class="os-card" id="btn-windows" onclick="selectOS('windows')">🪟 Windows</div>
+            <div class="os-card" id="btn-macos" onclick="selectOS('macos')">🍎 macOS</div>
+            <div class="os-card" id="btn-linux" onclick="selectOS('linux')">🐧 Linux</div>
+        </div>
+
+        <main>
+            <section id="windows-section" class="os-section">
+                <h2>Windows Preparation</h2>                
+                <h3>1. Install Docker</h3>
+                <p> Navigate to <a href="https://www.docker.com">https://www.docker.com</a> on your web browser</p>
+                <p> Select Download Docker Desktop > Download for Windows - AMD64 </p>
+                <img src="Resources/Windows1.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                <p>Open the downloaded executable and install, make sure to use these options!</p>
+                <img src="Resources/Windows2.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                <p>Once installed, open the Docker application, you can skip signing in by selecting this option:</p>
+                <img src="Resources/Windows3.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                <h3>2. Clone Docker container</h3>
+                <p> On the Docker window, go to the search tab and write "hpretl/iic-osic-tools".</p>
+                <p> Select "Pull" and wait for Docker to download the container. </p>        
+                <img src="Resources/Windows4.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                <p> <b>Be patient!</b> This process can take minutes depending on your computer and network speed. </p>
+                <p> You will know the cloning is done when a green checkmark appears </p>
+                <img src="Resources/Windows4_1.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+
+                <h3>2. Enable WSL</h3>
+                <p> Open the Windows terminal</p>
+                <img src="Resources/Windows5.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                <p>Copy the following command and press the Enter key</p>
+                <pre><code>wsl --install</code></pre>
+                <p>When finished executing, restart your computer; After logging back in, open the terminal again and execute:</p>
+                <pre><code>wsl --install Ubuntu</code></pre>
+                <p>This command will install WSL Ubuntu in your computer, it will prompt for a user and password. Remember them! These will be your credentials to access the tools.</p>
+                <img src="Resources/Windows6.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                Once done, open Docker again and enable WSL integration. Do not forget to click Apply.
+                <img src="Resources/Windows7.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+
+                <h3>3. Setup Ubuntu environment</h3>
+                <p> Open the Ubuntu terminal by typing "Ubuntu" in the search tab</p>
+                <img src="Resources/Windows8.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                <p> Type the following commands in the Ubuntu terminal, type your password and type "Y" if required</p>
+                <pre><code>sudo chmod 666 /var/run/docker.sock</code></pre>
+                <pre><code>sudo apt install socat</code></pre>
+                <img src="Resources/Windows9.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                After that, run the following commands
+                <pre><code>cd</code></pre>
+                <pre><code>git clone https://github.com/iic-jku/iic-osic-tools</code></pre>
+                <h2>Congratulations! You're all set for designing.</h2>
+                <h2>How to launch the tools</h2>
+                <p> Once you finished the preparation process, the process to launch the tools is very straightforward</p>
+                <p> Make sure Docker is running and open the Ubuntu terminal by typing "Ubuntu" in the search tab</p>
+                <img src="Resources/Windows8.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                <p>Type the following command in the terminal:</p>
+                <pre><code>~/IIC-OSIC-TOOLS/start_x.sh</code></pre>
+                <p>If the following message appears, just press the letter "s"</p>
+                <img src="Resources/Windows9_1.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                <p>And you're done! A new terminal will open, this will be your main contact with the design tools</p>
+                <img src="Resources/Windows10.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                <p>In this new terminal, type the following command to select the Skywater130 PDK</p>
+                <pre><code>sak-pdk sky130A</code></pre>
+                <p>To open the schematics tool, type the following command:</p>
+                <pre><code>xschem</code></pre>
+                <p>To open the layout tool, type the following command:</p>
+                <pre><code>klayout -e</code></pre>
+            </section>
+
+            <section id="macos-section" class="os-section">
+                <h2>macOS Preparation</h2>
+                <h3>1. Install Docker</h3>
+                <p> Navigate to <a href="https://www.docker.com">https://www.docker.com</a> on your web browser</p>
+                <p> Select Download Docker Desktop > Download for Mac </p>
+                <img src="Resources/Mac1.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+
+                <h3>2. Clone docker container</h3>
+                <p> Open Docker, go to the search tab and write "hpretl/iic-osic-tools".</p>
+                <p> Select "Pull" and wait for Docker to download the container. </p>
+                <img src="Resources/Mac2.png" alt="WSL2 Ubuntu terminal running on Windows Desktop" class="instruction-img">
+                <h3>3. Clone github repository</h3>
+                <p> Open a Mac terminal, paste and run the following commands:</p>
+                <pre><code>mkdir ~/open-source
+cd ~/open-source
+git clone https://github.com/iic-jku/iic-osic-tools.git
+cd iic-osic-tools</code></pre>
+                <pre><code>sudo chmod 666 /var/run/docker.sock</code></pre>
+
+                <h3>3. Download XQuartz</h3>
+                <p>Navigate to https://www.xquartz.org and select XQuartz-2.8.5.pkg</p>
+                <p>Open XQuartz and paste the following command in the window</p>
+                <pre><code>xhost + 127.0.0.1</code></pre>
+
+                <div class="image-placeholder">
+                    [Image Placeholder: Screenshot of XQuartz terminal with the 'added to access control list' message]
+                </div>
+            </section>
+
+            <section id="linux-section" class="os-section">
+                <h2>Linux Preparation</h2>
+                <p class="edit-text">[For Debian or RHEL users, the setup is native and straightforward. Insert instructions for installing the Docker engine and adding the user to the docker group to avoid sudo prompts.]</p>
+                <pre><code># Example for Debian/Ubuntu
+sudo apt update
+sudo apt install docker.io docker-compose git
+sudo usermod -aG docker $USER</code></pre>
+                <p class="edit-text">[Instruct students to log out and log back in to apply the group changes. Pulling the Docker image and handling X11 works natively out-of-the-box on most Xorg/Wayland setups.]</p>
+                
+                <div class="image-placeholder">
+                    [Image Placeholder: Screenshot of Terminal running 'docker pull hpretl/iic-osic-tools']
+                </div>
+            </section>
+
+        <footer style="margin-top: 40px; text-align: center; color: #777; font-size: 0.9rem;">
+            <p>Adapted from: kwantaekim.github.io/2024/05/25/OSE-Docker</p>
+        </footer>
+    </div>
+
+    <script>
+        function selectOS(os) {
+            document.querySelectorAll('.os-card').forEach(card => card.classList.remove('active'));
+            document.querySelectorAll('.os-section').forEach(section => section.classList.remove('active'));
+
+            document.getElementById('btn-' + os).classList.add('active');
+            document.getElementById(os + '-section').classList.add('active');
+            document.getElementById('common-steps').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
